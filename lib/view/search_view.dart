@@ -14,6 +14,26 @@ class _SearchViewState extends State<SearchView> {
       appBar: AppBar(
         title: const Text("Search City"),
       ),
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15),
+          child: TextField(
+            onSubmitted: (value) {
+              print(value);
+            },
+            decoration: InputDecoration(
+              contentPadding:
+                  EdgeInsets.symmetric(vertical: 25, horizontal: 16),
+              suffixIcon: const Icon(Icons.search),
+              labelText: "Search",
+              hintText: "Enter your city",
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
