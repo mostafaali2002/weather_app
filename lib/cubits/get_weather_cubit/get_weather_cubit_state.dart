@@ -1,12 +1,15 @@
 part of 'get_weather_cubit.dart';
 
-@immutable
-sealed class GetWeatherCubitState {}
+class GetWeatherCubitState {}
 
-final class GetWeatherCubitInitial extends GetWeatherCubitState {}
+class GetWeatherInitial extends GetWeatherCubitState {}
 
-final class GetWeatherCubitSuccess extends GetWeatherCubitState {}
+class GetWeatherSuccess extends GetWeatherCubitState {
+  final WeatherModel weatherModel;
 
-final class GetWeatherCubitFailure extends GetWeatherCubitState {}
+  GetWeatherSuccess({required this.weatherModel});
+}
 
-final class GetWeatherCubitLoad extends GetWeatherCubitState {}
+class GetWeatherFailure extends GetWeatherCubitState {}
+
+class GetWeatherLoad extends GetWeatherCubitState {}

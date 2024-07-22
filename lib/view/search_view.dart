@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weather/cubits/get_weather_cubit/get_weather_cubit.dart';
 import 'package:weather/model/weather_model.dart';
 import 'package:weather/services/weather_service.dart';
-
-WeatherModel? weatherModel;
 
 class SearchView extends StatefulWidget {
   const SearchView({super.key});
@@ -17,15 +17,19 @@ class _SearchViewState extends State<SearchView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Search City"),
+        title: const Text(
+          "Search City",
+          style: TextStyle(fontSize: 25),
+        ),
       ),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15),
           child: TextField(
             onSubmitted: (value) async {
-              weatherModel =
-                  await WeatherService(Dio()).getWeatherInfo(cityName: value);
+              Navigator.pop(context);
+              var getWeather = BlocProvider.of<GetWeatherCubit>(context);
+              getWeather.getWeather(cityName: value);
             },
             decoration: InputDecoration(
               contentPadding:
