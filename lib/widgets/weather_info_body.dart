@@ -12,32 +12,42 @@ class WeatherInfoBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            weatherModel.cityName,
-            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 35),
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                weatherModel.cityName,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style:
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 35),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              Lottie.asset(getWeatherimage(weatherModel)),
+              Text(
+                "${weatherModel.temp.toInt()} C",
+                style:
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              Text(
+                weatherModel.condition,
+                style:
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+              )
+            ],
           ),
-          const SizedBox(
-            height: 10,
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          Lottie.asset(getWeatherimage(weatherModel)),
-          Text(
-            "${weatherModel.temp.toInt()} C",
-            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          Text(
-            weatherModel.condition,
-            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
-          )
-        ],
+        ),
       ),
     );
   }
