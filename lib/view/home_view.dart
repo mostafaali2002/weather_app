@@ -26,7 +26,7 @@ class _HomeViewState extends State<HomeView> {
             iconSize: 32,
             onPressed: () {
               Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => SearchView(),
+                builder: (context) => const SearchView(),
               ));
             },
             icon: const Icon(Icons.search),
@@ -36,18 +36,21 @@ class _HomeViewState extends State<HomeView> {
       body: BlocBuilder<GetWeatherCubit, GetWeatherCubitState>(
         builder: (context, state) {
           if (state is GetWeatherInitial) {
-            return NoWeatherBody();
+            return const NoWeatherBody();
           } else if (state is GetWeatherLoad) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (state is GetWeatherSuccess) {
             return WeatherInfoBody(
               weatherModel: state.weatherModel,
             );
           } else {
-            return Center(
-                child: Text(
-              "oops there was an error",
-              style: TextStyle(fontSize: 30),
+            return const Center(
+                child: Padding(
+              padding: EdgeInsets.all(25),
+              child: Text(
+                "oops 😦 there was an error Enter correct city name",
+                style: TextStyle(fontSize: 30),
+              ),
             ));
           }
         },
