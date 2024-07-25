@@ -37,11 +37,11 @@ class _SearchViewState extends State<SearchView> {
                 return null;
               },
               onFieldSubmitted: (value) async {
-                if (formkey.currentState!.validate()) {
+                if (value != null) {
                   Navigator.pop(context);
                   var getWeather = BlocProvider.of<GetWeatherCubit>(context);
                   getWeather.getWeather(cityName: value);
-                }
+                } else {}
               },
               controller: controller,
               decoration: InputDecoration(

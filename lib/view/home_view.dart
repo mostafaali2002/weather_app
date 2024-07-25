@@ -49,7 +49,7 @@ class _HomeViewState extends State<HomeView> {
                 child: Padding(
               padding: EdgeInsets.all(25),
               child: Text(
-                "oops error😦 Enter correct city name or check network",
+                "oops error 😦 Enter city name or check network",
                 style: TextStyle(fontSize: 30),
               ),
             ));
