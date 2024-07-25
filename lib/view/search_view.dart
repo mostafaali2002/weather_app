@@ -13,32 +13,46 @@ class SearchView extends StatefulWidget {
 }
 
 class _SearchViewState extends State<SearchView> {
+  var formkey = GlobalKey<FormState>();
+  TextEditingController controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: formkey,
       appBar: AppBar(
         title: const Text(
           "Search City",
           style: TextStyle(fontSize: 25),
         ),
       ),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15),
-          child: TextField(
-            onSubmitted: (value) async {
-              Navigator.pop(context);
-              var getWeather = BlocProvider.of<GetWeatherCubit>(context);
-              getWeather.getWeather(cityName: value);
-            },
-            decoration: InputDecoration(
-              contentPadding:
-                  const EdgeInsets.symmetric(vertical: 25, horizontal: 16),
-              suffixIcon: const Icon(Icons.search),
-              labelText: "Search",
-              hintText: "Enter your city",
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
+      body: Form(
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: TextFormField(
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return 'Name is empty';
+                }
+                return null;
+              },
+              onFieldSubmitted: (value) async {
+                if (formkey.currentState!.validate()) {
+                  Navigator.pop(context);
+                  var getWeather = BlocProvider.of<GetWeatherCubit>(context);
+                  getWeather.getWeather(cityName: value);
+                }
+              },
+              controller: controller,
+              decoration: InputDecoration(
+                contentPadding:
+                    const EdgeInsets.symmetric(vertical: 25, horizontal: 16),
+                suffixIcon: const Icon(Icons.search),
+                labelText: "Search",
+                hintText: "Enter your city",
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
               ),
             ),
           ),
